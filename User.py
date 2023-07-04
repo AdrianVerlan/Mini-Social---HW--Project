@@ -1,14 +1,19 @@
 from Post import Post
 from Comment import Comment
 class User:
-    def __init__(self,id, username, email, pasword,):
-        self.id        = id
-        self.username  = username
-        self.email     = email
-        self.pasword   = pasword
-        
+    all=[]
+    def __init__(self,id, username, email, password,):
+        for user in User.all:
+            if user.id == id:
+             raise Exception("ID must be unique.")
+        self.id = id
+        self.username = username
+        self.email = email
+        self.password = password
+
         self.posts = []
         self.comments = []
+        User.all.append(self)
     def __str__(self):
         return f"User ({self.id})\n{self.username}\n"
     
@@ -33,4 +38,7 @@ class User:
              if comment.id == comment_id:
                 self.comments.remove(comment)
                 print("Comment was removed successfully")
+
+
+    
 
